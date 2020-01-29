@@ -1,0 +1,60 @@
+- err: 400
+  text: "Bad Request"
+  desc: "Your browser (or proxy) sent a request that this server could not understand or this request did not pass through Cloudflare."
+- err: 401
+  text: "Unauthorized"
+  desc: "This server could not verify that you are authorized to access this resource."
+- err: 403
+  text: "Forbidden"
+  desc: "You don't have permission to access the requested resource."
+- err: 404
+  text: "Not Found"
+  desc: "The requested resource was not found on this server."
+- err: 405
+  text: "Method Not Allowed"
+  desc: "The request method, with which the server has been requested is not allowed."
+- err: 408
+  text: "Request Timeout"
+  desc: "The server closed the network connection because the client didn't finish the request within the specified time."
+- err: 409
+  text: "Conflict"
+  desc: "The request could not be completed due to a conflict with the current state of the resource."
+- err: 410
+  text: "Gone"
+  desc: "The requested resource is no longer available on this server and there is no forwarding address."
+- err: 411
+  text: "Length Required"
+  desc: "The request method, with which the server has been requested requires a valid Content-Length header."
+- err: 412
+  text: "Precondition Failed"
+  desc: "The precondition on the request for the URL failed positive evaluation."
+- err: 413
+  text: "Payload Too Large"
+  desc: "The request method, with which the server has been requested does not allow the data transmitted, or the data volume exceeds the capacity limit."
+- err: 414
+  text: "Request-URI Too Large"
+  desc: "The length of the requested URL exceeds the capacity limit for this server. The request cannot be processed."
+- err: 415
+  text: "Unsupported Media Type"
+  desc: "The server does not support the media type transmitted in the request."
+- err: 418
+  text: "I'm a teapot!"
+  desc: "This server can not brew coffee as it is a teapot."
+- err: 429
+  text: "Too Many Requests"
+  desc: "The server has detected an unusually high number of requests coming from your network and will not process further requests until the flooding has subsided."
+- err: 500
+  text: "Internal Server Error"
+  desc: "The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there was an error in a CGI script."
+- err: 501
+  text: "Not Implemented"
+  desc: "The server does not support the action requested by the client."
+- err: 502
+  text: "Bad Gateway"
+  desc: "The server was acting as a gateway or proxy and received an invalid response from the upstream server (or the upstream server is currently unavailable due to maintenance downtime or capacity problems)."
+- err: 503
+  text: "Service Unavailable"
+  desc: "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later."
+- err: 504
+  text: "Gateway Timeout"
+  desc: "The gateway did not receive a timely response from the upstream server or application."
