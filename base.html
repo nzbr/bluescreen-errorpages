@@ -4,12 +4,10 @@
     <title>{{err}} - {{text}}</title>
         <meta charset="utf-8">
         <link href="https://static.nzbr.de/fonts/dos/dos.css" rel="stylesheet" type="text/css"/>
-        <link href="https://static.nzbr.de/fonts/nzbr/nzbr.css" rel="stylesheet" type="text/css"/>
-        <link href="https://static.nzbr.de/fonts/nzbr-text/nzbr-text.css" rel="stylesheet" type="text/css"/>
         <style>
             body {
                 background-color: darkblue;
-                font-family: "dos";
+                font-family: "dos", monospace;
                 text-align: center;
                 font-size: 2vw;
                 color: white;
@@ -28,13 +26,6 @@
                 text-align: center;
             }
 
-            .center-box {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
             .layer {
                 position: absolute;
                 padding: 1vh 1vw;
@@ -42,38 +33,6 @@
                 top: 0;
                 height: 98vh;
                 width: 98vw;
-            }
-
-            .nzbr {
-                font-size: 10vw;
-                font-family: nzbr;
-            }
-
-            .nzbr-text {
-                font-size: 10vw;
-                font-family: nzbr-text;
-            }
-
-            .texture {
-                background:url('https://static.nzbr.de/img/error/fractal-noise.png');
-                background-repeat:repeat-x;
-                background-position:0 0;
-                color:transparent;
-                -webkit-font-smoothing:antialiased;
-                -webkit-background-clip:text;
-                -moz-background-clip:text;
-                background-clip:text;
-                -webkit-text-fill-color:transparent;
-                margin:0;
-            }
-
-            .progressbar {
-                background: #1A1A1A;
-                margin: 0 auto;
-                width: 40vw;
-                height: 2.5vw;
-                border-radius: 1vw;
-                overflow: hidden;
             }
 
             #bsod {
@@ -95,46 +54,21 @@
                 text-align: left;
                 z-index: 1;
             }
-
-            #splash {
-                background: black;
-                z-index: 2;
-            }
-
-            #progress {
-                background-image: url('https://static.nzbr.de/img/error/fractal-noise.png');
-                //border-radius: 1vw;
-                height: 100%;
-                width: 0%;
-            }
         </style>
         <script type="text/javascript">
-            var curState = false;
-            var startProgress = -100;
-            document.onkeypress = function (e) {
-                e = e || window.event;
-                    if (document.getElementById("reboot").hidden) {
-                        history.back();
-                    }
+            let curState = false;
+            document.onkeypress = function (_) {
+                if (document.getElementById("reboot").hidden) {
+                    history.back();
+                }
             };
             setInterval(function () {
-                var cursors = document.getElementsByClassName("cursor");
+                const cursors = document.getElementsByClassName("cursor");
                 curState = (! curState);
-                for (var i = 0; i < cursors.length; i++){
+                for (let i = 0; i < cursors.length; i++){
                     cursors[i].innerHTML = (curState)?("_"):("&nbsp;");
                 }
             }, 500);
-            setInterval(function () {
-                if (! document.getElementById("splash").hidden && startProgress <= 1000){
-                    var progress = document.getElementById("progress");
-                    var p = startProgress/10;
-                    progress.style.width = p + "%";
-                    if (startProgress >= 1000){
-                        document.location.href="/";
-                    }
-                    startProgress++;
-                }
-            }, 3);
             function reboot(){
                 document.getElementById("reboot").hidden = false;
                 setTimeout(function () {
@@ -146,25 +80,28 @@
                            setTimeout(function () {
                                document.getElementById("starting").hidden = false;
                                 setTimeout(function () {
-                                    document.getElementById("splash").hidden = false;
+                                    document.location.href="/";
                                 }, 1000)
                            }, 200)
                         }, 400);
                     }, 500);
                 }, 200);
             }
+            setTimeout(function () {
+                window.location.reload(false)
+            }, 20000)
         </script>
     </head>
     <body>
         <div id="bsod">
             <p class="center">
-                <span id="windows">&nbsp;nzbr.de&nbsp;</span>
+                <span id="windows">&nbsp;{{domain}}&nbsp;</span>
             </p>
             <p>
                 An error has occured. To continue:
             </p>
             <p>
-                Press Enter to return to nzbr.de, or
+                Press Enter to return to {{domain}}, or
             </p>
             <p>
                 Press <a href="javascript:reboot();">CTRL+ALT+DEL</a> to restart your computer. If you do this,<br />
@@ -182,23 +119,14 @@
         <div class="layer" id="reboot" hidden="">
             <span id="harddisk" hidden="">Booting from Hard Disk...<br /></span>
             <span id="ver" hidden="">
-                <br />nzbr.de [Version 1.42.1337]<br />
-                <br />C&colon;&bsol;&gt;</span><span id="scriptinput" hidden="">cd nzbr.de<br />
-                C&colon;&bsol;nzbr.de&gt;start<br />
+                <br />{{domain}} [Version 1.42.1337]<br />
+                <br />C&colon;&bsol;&gt;</span><span id="scriptinput" hidden="">cd {{domain}}<br />
+                C&colon;&bsol;{{domain}}&gt;start<br />
             </span>
             <span id="starting" hidden="">
-                <br />Starting nzbr.de...
+                <br />Starting {{domain}}...
             </span>
             <span id="showcursor"><span class="cursor">_</span></span>
-        </div>
-        <div class="layer" id="splash" hidden="">
-            <div class="center-box">
-                <p class="texture"><span class="nzbr">nzbr</span><span class="nzbr-text">.de</span></p>
-                <br />
-                <div class="progressbar">
-                    <div id="progress"></div>
-                </div>
-            </div>
         </div>
     </body>
 </html>
