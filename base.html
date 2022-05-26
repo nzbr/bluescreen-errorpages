@@ -1,132 +1,137 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="us">
-    <head>
+  <head>
     <title>{{err}} - {{text}}</title>
-        <meta charset="utf-8">
-        <link href="https://static.nzbr.de/fonts/dos/dos.css" rel="stylesheet" type="text/css"/>
-        <style>
-            body {
-                background-color: darkblue;
-                font-family: "dos", monospace;
-                text-align: center;
-                font-size: 2vw;
-                color: white;
-            }
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        /* More Perfect DOS VGA from https://laemeur.sdf.org/fonts/ */
+        font-family: "dos";
+        src: url(data:application/font-woff;charset=utf-8;base64,{{font}})
+          format("woff");
+        font-style: normal;
+        font-weight: 400;
+      }
 
-            a {
-                color: white;
-                text-decoration: none;
-            }
+      body {
+        background-color: darkblue;
+        font-family: "dos", monospace;
+        text-align: center;
+        font-size: 2vw;
+        color: white;
+      }
 
-            a:hover {
-                text-decoration: gray underline;
-            }
+      a {
+        color: white;
+        text-decoration: none;
+      }
 
-            .center {
-                text-align: center;
-            }
+      a:hover {
+        text-decoration: gray underline;
+      }
 
-            .layer {
-                position: absolute;
-                padding: 1vh 1vw;
-                left: 0;
-                top: 0;
-                height: 98vh;
-                width: 98vw;
-            }
+      .center {
+        text-align: center;
+      }
 
-            #bsod {
-                text-align: left;
-                margin-top: 30vh;
-                margin-left: 10%;
-                margin-right: 10%;
-                z-index: 0;
-            }
+      .layer {
+        position: absolute;
+        padding: 1vh 1vw;
+        left: 0;
+        top: 0;
+        height: 98vh;
+        width: 98vw;
+      }
 
-            #windows {
-                background-color: lightgray;
-                color: darkblue;
-                padding: .01vw;
-            }
+      #bsod {
+        text-align: left;
+        margin-top: 30vh;
+        margin-left: 10%;
+        margin-right: 10%;
+        z-index: 0;
+      }
 
-            #reboot {
-                background: black;
-                text-align: left;
-                z-index: 1;
-            }
-        </style>
-        <script type="text/javascript">
-            let curState = false;
-            document.onkeypress = function (_) {
-                if (document.getElementById("reboot").hidden) {
-                    history.back();
-                }
-            };
-            setInterval(function () {
-                const cursors = document.getElementsByClassName("cursor");
-                curState = (! curState);
-                for (let i = 0; i < cursors.length; i++){
-                    cursors[i].innerHTML = (curState)?("_"):("&nbsp;");
-                }
-            }, 500);
-            function reboot(){
-                document.getElementById("reboot").hidden = false;
-                setTimeout(function () {
-                    document.getElementById("harddisk").hidden = false;
-                    setTimeout(function () {
-                        document.getElementById("ver").hidden = false;
-                        setTimeout(function () {
-                           document.getElementById("scriptinput").hidden = false;
-                           setTimeout(function () {
-                               document.getElementById("starting").hidden = false;
-                                setTimeout(function () {
-                                    document.location.href="/";
-                                }, 1000)
-                           }, 200)
-                        }, 400);
-                    }, 500);
-                }, 200);
-            }
+      #windows {
+        background-color: lightgray;
+        color: darkblue;
+        padding: 0.01vw;
+      }
+
+      #reboot {
+        background: black;
+        text-align: left;
+        z-index: 1;
+      }
+    </style>
+    <script type="text/javascript">
+      let curState = false;
+      document.onkeypress = function (_) {
+        if (document.getElementById("reboot").hidden) {
+          history.back();
+        }
+      };
+      setInterval(function () {
+        const cursors = document.getElementsByClassName("cursor");
+        curState = !curState;
+        for (let i = 0; i < cursors.length; i++) {
+          cursors[i].innerHTML = curState ? "_" : "&nbsp;";
+        }
+      }, 500);
+      function reboot() {
+        document.getElementById("reboot").hidden = false;
+        setTimeout(function () {
+          document.getElementById("harddisk").hidden = false;
+          setTimeout(function () {
+            document.getElementById("ver").hidden = false;
             setTimeout(function () {
-                window.location.reload(false)
-            }, 20000)
-        </script>
-    </head>
-    <body>
-        <div id="bsod">
-            <p class="center">
-                <span id="windows">&nbsp;{{domain}}&nbsp;</span>
-            </p>
-            <p>
-                An error has occured. To continue:
-            </p>
-            <p>
-                Press Enter to return to {{domain}}, or
-            </p>
-            <p>
-                Press <a href="javascript:reboot();">CTRL+ALT+DEL</a> to restart your computer. If you do this,<br />
-                you will lose any unsaved information in all open applications.
-            </p>
-            <p>
-		<!-- Error: 0E : 016F : BFF9B3D4 -->
-		Error: {{err}} : {{text}}<br />
-		{{desc}}
-            </p>
-            <p class="center">
-                Press any key to continue <span class="cursor">_</span>
-            </p>
-        </div>
-        <div class="layer" id="reboot" hidden="">
-            <span id="harddisk" hidden="">Booting from Hard Disk...<br /></span>
-            <span id="ver" hidden="">
-                <br />{{domain}} [Version 1.42.1337]<br />
-                <br />C&colon;&bsol;&gt;</span><span id="scriptinput" hidden="">cd {{domain}}<br />
-                C&colon;&bsol;{{domain}}&gt;start<br />
-            </span>
-            <span id="starting" hidden="">
-                <br />Starting {{domain}}...
-            </span>
-            <span id="showcursor"><span class="cursor">_</span></span>
-        </div>
-    </body>
+              document.getElementById("scriptinput").hidden = false;
+              setTimeout(function () {
+                document.getElementById("starting").hidden = false;
+                setTimeout(function () {
+                  document.location.href = "/";
+                }, 1000);
+              }, 200);
+            }, 400);
+          }, 500);
+        }, 200);
+      }
+      setTimeout(function () {
+        window.location.reload(false);
+      }, 20000);
+    </script>
+  </head>
+  <body>
+    <div id="bsod">
+      <p class="center">
+        <span id="windows">&nbsp;{{domain}}&nbsp;</span>
+      </p>
+      <p>An error has occurred. To continue:</p>
+      <p>Press Enter to return to {{domain}}, or</p>
+      <p>
+        Press <a href="javascript:reboot();">CTRL+ALT+DEL</a> to restart your
+        computer. If you do this,<br />
+        you will lose any unsaved information in all open applications.
+      </p>
+      <p>
+        <!-- Error: 0E : 016F : BFF9B3D4 -->
+        Error: {{err}} : {{text}}<br />
+        {{desc}}
+      </p>
+      <p class="center">
+        Press any key to continue <span class="cursor">_</span>
+      </p>
+    </div>
+    <div class="layer" id="reboot" hidden="">
+      <span id="harddisk" hidden="">Booting from Hard Disk...<br /></span>
+      <span id="ver" hidden="">
+        <br />{{domain}} [Version 1.42.1337]<br />
+        <br />C&colon;&bsol;&gt;</span
+      ><span id="scriptinput" hidden=""
+        >cd {{domain}}<br />
+        C&colon;&bsol;{{domain}}&gt;start<br />
+      </span>
+      <span id="starting" hidden=""> <br />Starting {{domain}}... </span>
+      <span id="showcursor"><span class="cursor">_</span></span>
+    </div>
+  </body>
 </html>

@@ -1,6 +1,9 @@
+- err: 000
+  text: "Unknown"
+  desc: "There is nothing here yet."
 - err: 400
   text: "Bad Request"
-  desc: "Your browser (or proxy) sent a request that this server could not understand or this request did not pass through Cloudflare."
+  desc: "Your browser (or proxy) sent a request that this server could not understand."
 - err: 401
   text: "Unauthorized"
   desc: "This server could not verify that you are authorized to access this resource."

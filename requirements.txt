@@ -1,2 +1,4 @@
-pyyaml
-Jinja2
+brotli == 1.*
+fonttools == 4.*
+Jinja2 == 3.*
+pyyaml == 6.*
