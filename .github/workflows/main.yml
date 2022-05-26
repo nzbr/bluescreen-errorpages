@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Setup Python
-        uses: actions/setup-python@3.1.2
+        uses: actions/setup-python@v3.1.2
         with:
           python-version: 3.x
           cache: pip
@@ -38,7 +38,7 @@ jobs:
         run: python3 build.py nzbr.de
         
       - name: Upload HTML
-        uses: actions/upload-artifact@3.1.0
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: error-pages
           path: build/
