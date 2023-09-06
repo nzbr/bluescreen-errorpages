@@ -41,7 +41,7 @@ jobs:
         run: python3 build.py '{{host}}'
 
       - name: Upload HTML
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: error-pages
           path: build/
